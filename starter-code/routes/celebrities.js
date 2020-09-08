@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Celebrity = require('../models/Celebrity');
+const Movie = require('../models/Movie');
 
 router.get("/celebrities", (req, res, next) => {
   Celebrity.find()
@@ -66,4 +67,7 @@ router.post("/celebrities/:id", (req, res) => {
 .catch(err => next(err));
 
 })
+
+
+
 module.exports = router;
