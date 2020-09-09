@@ -37,20 +37,32 @@ router.post("/movies", (req, res) => {
 
 router.get("/movies/:id/edit", (req, res) => {
   const id = req.params.id;
-  Movie.findById(id).then(movie => {
-    res.render("movies/edit", {
-      movie
+  Movie.findById(id).populate("cast").then(movie => {
+    Celebrity.find().then(celebrities => {
+      const filteredCelebrities = celebrities.filter(celeb => {
+        if(!movie.cast) return celeb
+        let includesCeleb = movie.cast.find(celebFromCast => celebFromCast.name.includes(celeb.name))
+        if(!includesCeleb) return celeb
+      })
+      res.render("movies/edit", {
+        movie,
+        filteredCelebrities
+      })
+      
     })
   }).catch(error => next(error))
 })
 
 router.post("/movies/:id", (req, res) => {
   const id = req.params.id;
+  console.log(req.body.cast);
   const { title, genre, plot, cast } = req.body;
   Movie.findByIdAndUpdate(id, {
     title, genre, plot, cast
-})
-.then(() => res.redirect('/movies'))
+  })
+  .then(() => {
+    console.log(title);
+  res.redirect('/movies')})
 .catch(err => next(err));
 
 })

@@ -3,11 +3,11 @@
 {{#each movies}}
 
 <h2>Title: {{title}}</h2>
-<a href="/movies/{{_id}}/edit">Edit movie</a>
+
 <h3>Genre: {{genre}}</h3>
 <p>Plot: {{plot}}</p>
 {{#each cast}}
 <p>Cast: {{name}}</p>
 {{/each }}
-
+<a href="/movies/{{_id}}/edit">Edit movie</a>
 {{/each}}

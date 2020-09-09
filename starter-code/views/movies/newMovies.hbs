@@ -8,11 +8,18 @@
 <label for="plot">Plot:</label>
 <input type="text" name="plot" id="plot" value="">
 
+
+
+  <h2>Mark the cast:</h2>
   <select name="cast" id="cast" value="" multiple>
 {{#each celebrities}}
   <option value="{{_id}}">{{name}}</option>
   {{/each}}
   </select>
+
+
+
+
 
   <button type="submit">Add movie</button>
 </form>
